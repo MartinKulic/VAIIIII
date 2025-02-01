@@ -19,10 +19,10 @@ return new class extends Migration
             $table->id();
             $table->string('path');
             $table->string('name');
-            $table->text('desc');
-            $table->text('caption');
+            $table->text('desc')->nullable();
+            $table->text('caption')->nullable();
             $table->unsignedBigInteger('autor_id');
-            $table->timestamp('s_date')->useCurrent();
+            $table->timestamps();
             $table->foreign('autor_id')->references('id')->on('users');
         });
 
