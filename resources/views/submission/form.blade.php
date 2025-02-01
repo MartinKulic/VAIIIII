@@ -82,7 +82,7 @@
     </div>
 
     <div class="col-12 col-md-6 order-md-2 order-1 align-items-center align-self-center text-center">
-        <img id="imagePreview" class="mw-100 mh-100" src="{{@old('path', @$model->path)}}" alt="Image Preview">
+        <img id="imagePreview" class="mw-100 mh-100" src="{{@old('path', asset('storage/'.@$model->path))}}" alt="Image Preview">
     </div>
 
 </div>

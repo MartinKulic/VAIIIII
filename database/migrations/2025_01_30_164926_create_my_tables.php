@@ -40,11 +40,11 @@ return new class extends Migration
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
         });
 
-        Schema::create('rating', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('image_id');
             $table->tinyInteger('value');
-            $table->timestamp('r_date')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 
             $table->primary(['user_id', 'image_id']);
             $table->foreign('user_id')->references('id')->on('users');

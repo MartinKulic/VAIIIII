@@ -14,4 +14,10 @@ class Image extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    //--------------------------------------
+
+    public function getRatings(){
+        return Rating::where(`image_id`, $this->id);
+    }
 }

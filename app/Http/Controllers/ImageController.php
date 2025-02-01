@@ -6,7 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SubmissionController extends Controller
+class ImageController extends Controller
 {
     public function __construct()
     {
@@ -16,7 +16,7 @@ class SubmissionController extends Controller
     public function create()
     {
         return view('submission.add',[
-            'action' => route('submission.store'),
+            'action' => route('image.store'),
             'purpose' => "add",
             'method' => 'post'
         ]);
@@ -58,24 +58,34 @@ class SubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Image $image)
     {
-        //
+        return view('submission.edit',[
+            'action' => route('image.update', ['image' => $image->id]),
+            'purpose' => "edit",
+            'method' => 'post',
+            'model' => $image
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Image $image)
     {
-        //
+        // update
+        return redirect()->route('home')->with('success', 'Obrázok bol úspešne upraveny!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Image $image)
     {
-        //
+        Storage::disk('public')->delete($image->path);
+
+        $image->delete();
+
+        return redirect()->route('home')->with('success', 'Obrázok bol úspešne odstraneny!');
     }
 }

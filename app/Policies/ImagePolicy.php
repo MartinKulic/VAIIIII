@@ -6,7 +6,7 @@ use App\Models\Image;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class SubmissionPolicy
+class ImagePolicy
 {
     /**
      * Determine whether the user can view any models.

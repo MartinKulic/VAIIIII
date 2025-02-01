@@ -3,7 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubmissionControler;
-use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/d/{imgID}', [HomeController::class, 'detail'])->name('image.detail');
 
 
 
@@ -25,9 +26,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth']], function () {
     //Route::get('/submission/new', [SubmissionController::class, 'new'])->name('submission.new');
 
-    Route::resource('submission', SubmissionController::class);
+    Route::resource('image', ImageController::class);
 
-    Route::delete('submission/{submission}/delete', [SubmissionController::class, 'destroy'])->name('submission.destroy');
+    Route::delete('image/{submission}/delete', [ImageController::class, 'destroy'])->name('image.destroy');
 });
 
 Route::middleware('auth')->group(function () {

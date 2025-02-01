@@ -32,7 +32,7 @@
                     @auth
 
                     <li class="nav-item">
-                        <a class="btn btn btn-outline-info" href="{{route('submission.create')}}"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
+                        <a class="btn btn btn-outline-info" href="{{route('image.create')}}"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
                     </li>
 
                     @endauth

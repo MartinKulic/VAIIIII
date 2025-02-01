@@ -34,11 +34,10 @@
 
                     <div class="container">
                         <div class="d-fled flex-column">
-{{--                            "<?= $link->url("home.detail", ["subId" => $image->getId()]) ?>"--}}
-                            <a href="#"><img src="{{asset('storage/' . $image->path)}}"></a>
+                            <a href="{{route('image.detail', ['imgID'=>$image->id])}}"><img src="{{asset('storage/' . $image->path)}}"></a>
                             <div class="scoreRow">
                                 <span class="green"> <i class="bi bi-caret-up"></i></span >
-{{--                                <spam class="score_number"><?= \App\Models\Rating::getRatingValueFor($image->getId()) ?></spam>--}}
+                                <span class="score_number">{{ \App\Models\Rating::getRatingValueFor($image->id) }} </span>
                                 <span class="red"><i class="bi bi-caret-down"></i></span >
                             </div>
                         </div>
@@ -69,11 +68,11 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="{{asset('js/numberColour.js"')}}"></script>
+    <script src="{{asset('js/numberColour.js')}}"></script>
     <script>
         let imagesScoreVals = document.getElementsByClassName("score_number")
         for (let score of imagesScoreVals){
             colour(score)
         }
+    </script>
 </x-topBar>
-
