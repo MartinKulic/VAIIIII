@@ -67,16 +67,22 @@
                 </div>
                 @endif
             </div>
+            @if ($purpose == "edit")
             <div id="confirmButton" class="d-none">
                 <div class="row mt-2 flex-row-reverse">
                     <div class="col-4"></div>
                     <div class="col-4 ext-end mx-4">
                         <div class="row">
-{{--                            <a class="btn btn-danger" href="{{route('submission.destroy', @old(@$model->id))}}">Really?</a>--}}
+                            <form action="{{ route('image.destroy', $model->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Really?</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
 
         </form>
     </div>
