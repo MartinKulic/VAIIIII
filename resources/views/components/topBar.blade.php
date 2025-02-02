@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-{{--    <title>{{ config('app.name', 'Laravel') }}</title>--}}
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <meta charset="UTF-8">
     <meta lang="sk">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -21,7 +22,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-navbar">
         <div class="container">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="{{route('home')}}">
                 <img src="{{ asset('assets/Logo.png') }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +38,7 @@
 
                     @endauth
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Nedávne</a>
+                        <a class="nav-link active" aria-current="page" href="{{route('home')}}">Nedávne</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,23 +55,25 @@
 
                 <span class="d-flex">
                     @auth
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="{{route('profile.edit')}}">Upraviť</a></li>
-                            <li><a class="dropdown-item " href="#"><form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                        <div class="nav-item dropdown">
 
-                            <x-dropdown-link :href="route('logout')"
-                                             onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form></a></li>
-                        </ul>
-                    </li>
+                                <a class="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item " href="{{route('profile.edit')}}">Upraviť</a></li>
+                                    <li><a class="dropdown-item " href="#"><form class="dropdown-item" method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-dropdown-link :href="route('logout')"
+                                                     onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form></a></li>
+                                </ul>
+
+                        </div>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-primary me-3">Prihlásiť</a>
                         <a href="{{ route('register') }}" class="btn btn-primary">Registrovať</a>

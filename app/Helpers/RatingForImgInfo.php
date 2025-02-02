@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Rating;
 use JsonSerializable;
 use stdClass;
+use Thiagoprz\CompositeKey\HasCompositeKey;
 
 // poc hodnoteni pozitivne nedativne, hodnotenie prihlaseneho uzivatela
 class RatingForImgInfo implements JsonSerializable
@@ -14,15 +15,19 @@ class RatingForImgInfo implements JsonSerializable
     protected $score=0;
     protected $curUserVote=0;
 
+    protected $curUser=null;
+    protected $curImage=null;
+
     public function __construct($imgId, $userID)
     {
         $ratings = Rating::where('image_id', $imgId)->get();
+        $this->curUser = $userID;
+        $this->curImage = $imgId;
 
         foreach ($ratings as $rating) {
             $ratingVal = $rating->value;
             if ($rating->getUserId() == $userID) {
                 $this->curUserVote = $ratingVal;
-                $this->curUserRateId = $rating->getId();
             }
             if ($ratingVal>0){
                 $this->up++;
@@ -64,11 +69,8 @@ class RatingForImgInfo implements JsonSerializable
         $this->curUserRateId = null;
     }
     public function getCurUserRate(){
-        return Rating::getOne($this->curUserRateId);
-    }
-    public function getCurUserRateId(): ?int
-    {
-        return $this->curUserRateId;
+
+        return Rating::where('user_id', $this->curUser)->where('image_id', $this->curImage)->first();
     }
 
     public function getUp(): int

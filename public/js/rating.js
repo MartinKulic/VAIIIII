@@ -19,7 +19,14 @@ class Rating{
             voted: value,
             imgID: this.#image_id
         });
-        this.updateRating(response)
+
+        if(response['error']=== 'Unauthorized')
+        {
+            console.log("Musis byt prihlaseny aby si mohol hodnotit")
+        }
+        else {
+            await this.updateRating(response)
+        }
     }
     async updateRating(rating){
         //voted UP
@@ -47,7 +54,9 @@ class Rating{
         this.#voteDownCount.textContent=rating["down"]
     }
 
-    async sendReques(body) {let url = "http://127.0.0.1/?c=submission&a=rate&imgID="+this.#image_id //http://localhost/?c=submission&a=rate
+    async sendReques(body) {
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        let url = "http://localhost/image/"+this.#image_id+"/rate" //http://127.0.0.1/?c=submission&a=rate
         try {
 
             let response = await fetch(
@@ -58,6 +67,7 @@ class Rating{
                     headers: {
                         "Content-type": "application/json",
                         "Accept": "application/json",
+                        "X-CSRF-TOKEN": csrfToken,
                     }
                 })
 

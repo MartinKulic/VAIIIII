@@ -54,7 +54,7 @@
         </div>
     </div>
     <script src="{{asset('js/numberColour.js')}}"></script>
-{{--    <script src="{{asset('js/rating.js)}}"></script>--}}
+    <script src="{{asset('js/rating.js')}}"></script>
     <script>
         let scoreVal = document.getElementById("scoreVal")
         colour(scoreVal)

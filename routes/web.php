@@ -29,6 +29,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('image', ImageController::class);
 
     Route::delete('image/{submission}/delete', [ImageController::class, 'destroy'])->name('image.destroy');
+
+//ajax
+    Route::post("/image/{image}/rate", [ImageController::class, 'rate'])->name('image.rate');
 });
 
 Route::middleware('auth')->group(function () {
