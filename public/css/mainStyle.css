@@ -103,5 +103,24 @@
     text-decoration: none;
     cursor: pointer;
 }
+.fullscreen {
+    width: 100vw;
+    height: 100vh;
+    position: fixed; /* Uistíme sa, že prvok je na celú obrazovku */
+    top: 0;
+    left: 0;
+    display: flex; /* Flexbox na centrovanie */
+    align-items: center; /* Vertikálne centrovanie */
+    justify-content: center; /* Horizontálne centrovanie */
+    background-color: rgba(26, 32, 44, 0.85);
+}
 
+.fullscreen img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.unfocuseBackground{
+    background-color: rgba(26, 32, 44, 0.85);
+}
 

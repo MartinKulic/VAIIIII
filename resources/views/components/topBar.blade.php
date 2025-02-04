@@ -84,7 +84,7 @@
         </div>
     </nav>
 </header>
-
+<!-- Alerts -->
 <div id = alertBar class="position-fixed top-2 start-50 translate-middle-x">
 
 </div>

@@ -1,5 +1,8 @@
+<?php $rating = $submission->getRatingInfo() ?>
+
+
 <x-topBar>
-    <?php $rating = $submission->getRatingInfo() ?>
+
     <div class = container-fluid>
         <div class="row">
 
@@ -12,7 +15,7 @@
 
                     <div class="align-items-center flex-fill mt-2">
                         <div type="button" data-toggle="modal" data-target="#exampleModal">
-                            <img class="col-12" alt="Hlavny obrazok" src="{{asset('storage/' . $submission->getImage()->path)}}">
+                            <img id="mImage" class="col-12" alt="Hlavny obrazok" src="{{asset('storage/' . $submission->getImage()->path)}}">
                         </div>
                     </div>
                     <div class="flex-row mt-3 d-flex justify-content-between">
@@ -53,14 +56,24 @@
 
         </div>
     </div>
-    <script src="{{asset('js/numberColour.js')}}"></script>
-    <script src="{{asset('js/comunication.js')}}"></script>
-    <script src="{{asset('js/rating.js')}}"></script>
-    <script src="{{asset('js/faving.js')}}"></script>
-    <script>
-        let scoreVal = document.getElementById("scoreVal")
-        colour(scoreVal)
-        let rat = new Rating()
-        let fav = new Faving()
-    </script>
+
+
 </x-topBar>
+
+<!-- Obrazok na celu obrazovku -->
+<div id="fullscreen" class="fullscreen position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center d-none unfocuseBackground">
+    <img src="{{ asset('storage/' . $submission->getImage()->path) }}" alt="zväčšený obrázok">
+</div>
+
+<script src="{{asset('js/numberColour.js')}}"></script>
+<script src="{{asset('js/comunication.js')}}"></script>
+<script src="{{asset('js/rating.js')}}"></script>
+<script src="{{asset('js/faving.js')}}"></script>
+<script>
+    let scoreVal = document.getElementById("scoreVal")
+    colour(scoreVal)
+    let rat = new Rating()
+    let fav = new Faving()
+</script>
+<script src="{{asset('js/imgFullscreen.js')}}"></script>
+
