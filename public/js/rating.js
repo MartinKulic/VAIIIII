@@ -20,12 +20,19 @@ class Rating{
             imgID: this.#image_id
         });
 
-        if(response['error']=== 'Unauthorized')
+        if(response.status !== 200)
         {
-            console.log("Musis byt prihlaseny aby si mohol hodnotit")
+            console.log("Chyba")
+            console.log(response.status)
+
+            if(response.status === 401)
+            {
+                console.log("Iba prihlaseny mozu hodnotit")
+                showTimedAllert("Iba prihlaseny mozu hodnotit", 3000, "warning")
+            }
         }
         else {
-            await this.updateRating(response)
+            response.json().then((r)=>(this.updateRating(r)))
         }
     }
     async updateRating(rating){
@@ -71,11 +78,11 @@ class Rating{
                     }
                 })
 
-            if (response.status !== 200){
-                throw new Error("Wrong Response")
-            }
+            // if (response.status !== 200){
+            //     throw new Error("Wrong Response", response)
+            // }
 
-            return response.json()
+            return response //.json()
         } catch (ex) {
 
             return ex;

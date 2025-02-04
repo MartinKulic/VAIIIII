@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $images = Image::orderBy('created_at','DESC')->get();
+        $images = Image::orderBy('created_at','DESC')->paginate(64);
 
         return view('home.index', [
             "images" => $images,

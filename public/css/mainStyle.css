@@ -98,4 +98,10 @@
     border-radius: 5px;
 }
 
+.cancelAlertButton{
+    margin-left: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 

@@ -22,6 +22,9 @@ Route::get('/d/{imgID}', [HomeController::class, 'detail'])->name('image.detail'
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/phpinfo', function () {
+    phpinfo();
+});
 
 Route::group(['middleware' => ['auth']], function () {
     //Route::get('/submission/new', [SubmissionController::class, 'new'])->name('submission.new');
