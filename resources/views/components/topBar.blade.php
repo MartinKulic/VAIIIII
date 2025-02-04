@@ -84,7 +84,8 @@
         </div>
     </nav>
 </header>
-<div id = alertBar class="position-fixed top-0 start-50 translate-middle-x">
+
+<div id = alertBar class="position-fixed top-2 start-50 translate-middle-x">
 
 </div>
 <div class="container-fluid mt-3">

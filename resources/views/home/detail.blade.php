@@ -22,9 +22,9 @@
                             <span id="scoreVal" class="mx-2 h4 align-middle"><?= $rating->getScore() ?></span>
                             <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger "><i class="bi-hand-thumbs-down fs-3"></i></button>
                             <span id="voteDownCount" class="red"><?= $rating->getDown() ?></span>
-                            <<button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi-star-fill fs-3"></i></button>
+                            <button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi-star-fill fs-3"></i></button>
                         </div>
-                        <!-- Edit button only if you are author -->S
+                        <!-- Edit button only if you are author -->
                         @can('update', $submission->getImage())
                         <div class="d-flex align-items-stretch">
                             <a href="{{route('image.edit', ["image" => $submission->getImage()])}}" class="btn btn-primary d-flex align-items-center">
@@ -35,7 +35,7 @@
                     <div class="row mt-3">
                         <div class="col pt-0 pb-3 px-3 bg-body-secondary">
                             <div class="row d-inline">
-                                <h5>{{ $submission->getImage()->name }}</h5>
+                                <h4>{{ $submission->getImage()->name }}</h4>
                                 <p class="fs-6">By {{ $submission->getAutorName() }}</p>
                             </div>
                             <p class = "text-break">

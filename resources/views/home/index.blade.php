@@ -67,9 +67,15 @@
 
     <script src="{{asset('js/numberColour.js')}}"></script>
     <script>
+        //vyfarbenie cisel
         let imagesScoreVals = document.getElementsByClassName("score_number")
         for (let score of imagesScoreVals){
             colour(score)
         }
     </script>
+    @if (session("success"))
+        <script>
+            showTimedAllert("{{session('success')}}", 3000, "success")
+        </script>
+    @endif
 </x-topBar>

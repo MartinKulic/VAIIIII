@@ -20,7 +20,7 @@ class Rating{
             imgID: this.#image_id
         }, "image/"+this.#image_id+"/rate");
 
-        if(isResponseGood(response))
+        if(isResponseGood(response, "Iba po prihlaseni je mozne hodnotit"))
         {
             response.json().then((r)=>(this.updateRating(r)))
         }

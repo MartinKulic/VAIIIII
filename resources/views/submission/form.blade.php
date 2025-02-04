@@ -67,24 +67,24 @@
                 </div>
                 @endif
             </div>
-            @if ($purpose == "edit")
+        </form>
+
+        @if ($purpose == "edit")
             <div id="confirmButton" class="d-none">
-                <div class="row mt-2 flex-row-reverse">
-                    <div class="col-4"></div>
-                    <div class="col-4 ext-end mx-4">
-                        <div class="row">
-                            <form action="{{ route('image.destroy', $model->id) }}" method="POST" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
+                <form action="{{ route('image.destroy', $model->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <div class="row mt-2 flex-row-reverse">
+                        <div class="col-4"></div>
+                        <div class="col-4 ext-end mx-4">
+                            <div class="row d-flex">
                                 <button type="submit" class="btn btn-danger">Really?</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-            @endif
-
-        </form>
+        @endif
     </div>
 
     <div class="col-12 col-md-6 order-md-2 order-1 align-items-center align-self-center text-center">

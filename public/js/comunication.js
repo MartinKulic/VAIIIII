@@ -26,7 +26,7 @@ async function sendRequest(body, route) {
     }
 }
 
-function isResponseGood(response){
+function isResponseGood(response, failMessage){
     if(response.status !== 200)
     {
         console.log("Chyba")
@@ -34,8 +34,8 @@ function isResponseGood(response){
 
         if(response.status === 401)
         {
-            console.log("Iba prihlaseny mozu hodnotit")
-            showTimedAllert("Iba prihlaseny mozu hodnotit", 3000, "warning")
+            console.log(failMessage)
+            showTimedAllert(failMessage, 3000, "warning")
         }
         return false
     }

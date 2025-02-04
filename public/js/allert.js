@@ -54,5 +54,5 @@ function dismissAlert(alert)
     alert.classList.remove("show")
     setTimeout(()=>{
         alert.remove()
-    }, 1000)
+    }, 500)
 }

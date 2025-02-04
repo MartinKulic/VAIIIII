@@ -13,19 +13,22 @@ class Faving{
             imgID: this.#image_id
         }, "fav");
 
-        if(isResponseGood(response)){
+        if(isResponseGood(response, "Len prihlaseny pouzivatelia mozu mat svoje oblubene obrazky")){
             response.json().then((r)=>(this.updateFav(r)))
         }
     }
     updateFav(response){
         if(response["faved"]===true){
-            this.#favButtonFav.classList.add("btn-warming")
             this.#favButtonFav.classList.remove("btn-outline-warning")
+            this.#favButtonFav.classList.add("btn-warning")
+            showTimedAllert("Uspene pridany medzi oblubene", 1000, "success")
         }
         else
         {
-            this.#favButtonFav.classList.remove("btn-warming")
+            this.#favButtonFav.classList.remove("btn-warning")
             this.#favButtonFav.classList.add("btn-outline-warning")
+
+            showTimedAllert("Uspene odstranene z oblubenych", 1000, "secondary")
         }
     }
 }
