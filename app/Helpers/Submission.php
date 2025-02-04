@@ -2,9 +2,11 @@
 
 namespace App\Helpers;
 
+use App\Models\Fav;
 use App\Models\Image;
 use App\Models\User;
 use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
 
 class Submission
 {
@@ -14,6 +16,7 @@ class Submission
     protected $autorId;
     protected $image_tags = [];
     protected $fullRating; // poc hodnoteni pozitivne nedativne, hodnotenie prihlaseneho uzivatela
+    protected $isFaved;
 
     function __construct($image_id, $user_id){
         if(is_null($image_id) && is_null($user_id)){
@@ -23,6 +26,7 @@ class Submission
 
         $this->image = Image::find($image_id);
         if (is_null($this->image) ){
+            $this->imageId = null;
             return null;
         }
         $autor = User::find($this->image->autor_id);
@@ -32,10 +36,17 @@ class Submission
         $this->imageId=$this->image?->id ?? 0;
 
         $this->fullRating = new RatingForImgInfo($this->image->id, $user_id);
+
+        $this->isFaved = Fav::where("user_id", Auth::id())->where('image_id', $this->image->id)->count() > 0;
+
         return $this;
     }
 
 
+    public function getIsFaved()
+    {
+        return $this->isFaved;
+    }
     public function getRatingInfo(){
         return $this->fullRating;
     }

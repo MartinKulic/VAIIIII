@@ -18,13 +18,13 @@
                     <div class="flex-row mt-3 d-flex justify-content-between">
                         <div class="col">
                             <span id="voteUpCount" class="green"><?= $rating->getUp() ?></span>
-                            <button id="voteUp" class=" btn btn-<?php if (!($rating->getCurUserVote() > 0) ){ ?><?="outline-"?><?php } ?>success "><i class="bi bi-hand-thumbs-up fs-3"></i></i></button>
+                            <button id="voteUp" class=" btn btn-<?php if (!($rating->getCurUserVote() > 0) ){ ?><?="outline-"?><?php } ?>success "><i class="bi bi-hand-thumbs-up fs-3"></i></button>
                             <span id="scoreVal" class="mx-2 h4 align-middle"><?= $rating->getScore() ?></span>
                             <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger "><i class="bi-hand-thumbs-down fs-3"></i></button>
                             <span id="voteDownCount" class="red"><?= $rating->getDown() ?></span>
-                            <button class="btn btn-outline-warning mx-lg-5 mx-1"><i class="bi-star-fill fs-3"></i></button>
+                            <<button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi-star-fill fs-3"></i></button>
                         </div>
-                        <!-- Edit button only if you are author -->
+                        <!-- Edit button only if you are author -->S
                         @can('update', $submission->getImage())
                         <div class="d-flex align-items-stretch">
                             <a href="{{route('image.edit', ["image" => $submission->getImage()])}}" class="btn btn-primary d-flex align-items-center">
@@ -54,10 +54,13 @@
         </div>
     </div>
     <script src="{{asset('js/numberColour.js')}}"></script>
+    <script src="{{asset('js/comunication.js')}}"></script>
     <script src="{{asset('js/rating.js')}}"></script>
+    <script src="{{asset('js/faving.js')}}"></script>
     <script>
         let scoreVal = document.getElementById("scoreVal")
         colour(scoreVal)
         let rat = new Rating()
+        let fav = new Faving()
     </script>
 </x-topBar>

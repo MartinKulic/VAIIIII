@@ -27,6 +27,10 @@ class HomeController extends Controller
 
         $submission = new Submission($imgID, Auth::id());
 
+        if (($submission->getImageId()) == 0) {
+            abort(404, 'Image not found');
+        }
+
         return view('home.detail', [
             "submission" => $submission
         ]);

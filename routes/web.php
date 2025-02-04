@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubmissionControler;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 //ajax
     Route::post("/image/{image}/rate", [ImageController::class, 'rate'])->name('image.rate');
+    Route::post("/fav", [FavController::class, 'favToggle'])->name('fav.toggle');
 });
 
 Route::middleware('auth')->group(function () {

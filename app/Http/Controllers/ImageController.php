@@ -12,10 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
-    public function __construct()
-    {
-        //$this->autorizeResource(Image::class, 'image');
-    }
 
     public function create()
     {
@@ -106,17 +102,14 @@ class ImageController extends Controller
 
     public function rate(Request $request, Image $image)
     {
-        if (!Auth::check()) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
         if (!$image->exists())
         {
-            return response()->json(['error' => 'Image does not exist'], 401);
+            return response()->json(['error' => 'Image does not exist'], 402);
         }
 
         $voteVal = (int) $request->get('voted');
         if($voteVal == 0){
-            return response()->json(['error' => 'Incorect value'], 401);
+            return response()->json(['error' => 'Incorect value'], 402);
         }
         $ratingInfo = new RatingForImgInfo($image->id, Auth::id());
         $rating = $ratingInfo->getCurUserRate();

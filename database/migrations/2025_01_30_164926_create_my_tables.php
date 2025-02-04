@@ -54,7 +54,7 @@ return new class extends Migration
         Schema::create('favs', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('image_id');
-            $table->timestamp('f_date')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
 
             $table->primary(['user_id', 'image_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
