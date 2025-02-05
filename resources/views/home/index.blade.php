@@ -1,32 +1,24 @@
 <x-topBar>
     <div class = container-fluid>
-        <div class="row">
+        <div class="row my-0">
 
-{{--            <?php if (!is_null(@$data['messages'])): ?>--}}
-{{--                <?php foreach ($data['messages'] as $msg): ?>--}}
-{{--            <div class="alert alert-primary" role="alert" role="alert">--}}
-{{--                    <?= $msg ?>--}}
-{{--            </div>--}}
-{{--            <?php endforeach; ?>--}}
-{{--            <?php endif; ?>--}}
 
-            <span class="pagesNavigator">
-        <a href="#"><<</a>
-        <a href="#"><</a>
-        <a href="#" class="tagDisabled">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a>...</a>
-        <a href="#">1654</a>
-        <a href="#">></a>
-        <a href="#">>></a>
-      </span>
             <!-- Side pannel -->
             @include('components/sidePanel')
 
 
                 <!-- Galeria obrazkov -->
             <main class="col-xl-10 col-lg-9 col-12 order-lg-2 order-1">
+
+{{--                <!-- Paging -->--}}
+{{--                <div class="row d-flex justify-content-center align-items-center align-self-center text-center">--}}
+
+{{--                    <div class="col-6 d-flex d-flex justify-content-end align-items-center align-self-center text-center">--}}
+{{--                        {{$images->links()}}--}}
+{{--                    </div>--}}
+{{--                    <div class="col-6"></div>--}}
+{{--                </div>--}}
+
                 <hr class="hr">
                 <div class="mainGallery m-lg-3 m-sm-0">
 
@@ -50,17 +42,13 @@
             </main>
 
 
-            <span class="pagesNavigator container-fluid order-2">
-        <a href="#"><<</a>
-        <a href="#"><</a>
-        <a href="#" class="tagDisabled">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a>...</a>
-        <a href="#">1654</a>
-        <a href="#">></a>
-        <a href="#">>></a>
-      </span>
+
+        </div>
+        <!-- Paging -->
+        <div class="row d-flex justify-content-center align-items-center align-self-center text-center">
+            <div class="col d-flex d-flex justify-content-center align-items-center align-self-center text-center">
+                {{$images->links()}}
+            </div>
         </div>
     </div>
 

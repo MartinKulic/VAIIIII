@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 
 use App\Helpers\Submission;
@@ -9,9 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    const PAGING = 64;
     public function index(Request $request)
     {
-        $images = Image::orderBy('created_at','DESC')->paginate(64);
+        $images = Image::orderBy('created_at','DESC')->paginate(self::PAGING);
 
         return view('home.index', [
             "images" => $images,
@@ -40,7 +43,7 @@ class HomeController extends Controller
         }
 
         return view('home.index', [
-            "images" => $dotaz->paginate(64),
+            "images" => $dotaz->paginate(self::PAGING),
         ]);
     }
 

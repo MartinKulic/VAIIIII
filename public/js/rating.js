@@ -1,6 +1,12 @@
 class Rating{
     #upElement = document.getElementById("voteUp")
+    #upIcon = this.#upElement.getElementsByTagName("i")[0]
+    #upSpinner = this.#upElement.getElementsByTagName("span")[0]
+
     #downElement = document.getElementById("voteDown")
+    #downIcon = this.#downElement.getElementsByTagName("i")[0]
+    #downSpinner = this.#downElement.getElementsByTagName("span")[0]
+
     #voteUpCount = document.getElementById("voteUpCount")
     #voteDownCount =document.getElementById("voteDownCount")
     #scoreVal = document.getElementById("scoreVal")
@@ -9,8 +15,23 @@ class Rating{
 
 
     constructor() {
-        this.#upElement.addEventListener("click", ()=>this.vote(1))
-        this.#downElement.addEventListener("click", ()=>{this.vote(-1)})
+        this.#upElement.addEventListener("click", ()=>{
+            this.#upIcon.classList.add("d-none")
+            this.#upSpinner.classList.remove("d-none")
+            this.vote(1).then(()=>{
+                this.#upIcon.classList.remove("d-none")
+                this.#upSpinner.classList.add("d-none")
+            })
+
+        })
+        this.#downElement.addEventListener("click", ()=>{
+            this.#downIcon.classList.add("d-none")
+            this.#downSpinner.classList.remove("d-none")
+            this.vote(-1).then(()=>{
+                this.#downIcon.classList.remove("d-none")
+                this.#downSpinner.classList.add("d-none")
+            })
+        })
     }
 
     async vote(value)

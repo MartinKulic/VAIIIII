@@ -1,11 +1,17 @@
 class Faving{
 
     #favButtonFav = document.getElementById("favBtn")
+    #favIcon = this.#favButtonFav.getElementsByTagName("i")[0]
+    #favSpinner = this.#favButtonFav.getElementsByTagName("span")[0]
 
     #image_id = document.getElementById("image_id").value
 
     constructor() {
-        this.#favButtonFav.addEventListener("click", ()=>this.sendToggle())
+        this.#favButtonFav.addEventListener("click", ()=>{
+            this.#favIcon.classList.add("d-none")
+            this.#favSpinner.classList.remove("d-none")
+            this.sendToggle()
+        })
     }
 
     async sendToggle(){
@@ -30,5 +36,8 @@ class Faving{
 
             showTimedAllert("Uspene odstranene z oblubenych", 1000, "secondary")
         }
+
+        this.#favSpinner.classList.add("d-none")
+        this.#favIcon.classList.remove("d-none")
     }
 }

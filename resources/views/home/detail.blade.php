@@ -21,11 +21,19 @@
                     <div class="flex-row mt-3 d-flex justify-content-between">
                         <div class="col">
                             <span id="voteUpCount" class="green"><?= $rating->getUp() ?></span>
-                            <button id="voteUp" class=" btn btn-<?php if (!($rating->getCurUserVote() > 0) ){ ?><?="outline-"?><?php } ?>success "><i class="bi bi-hand-thumbs-up fs-3"></i></button>
+                            <button id="voteUp" class=" btn btn-<?php if (!($rating->getCurUserVote() > 0) ){ ?><?="outline-"?><?php } ?>success ">
+                                <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
+                                <i class="bi bi-hand-thumbs-up fs-3"></i>
+                            </button>
                             <span id="scoreVal" class="mx-2 h4 align-middle"><?= $rating->getScore() ?></span>
-                            <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger "><i class="bi-hand-thumbs-down fs-3"></i></button>
+                            <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger ">
+                                <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
+                                <i class="bi-hand-thumbs-down fs-3"></i></button>
                             <span id="voteDownCount" class="red"><?= $rating->getDown() ?></span>
-                            <button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi bi-heart fs-3"></i></button>
+                            <button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning ">
+                                <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
+                                <i class="bi bi-heart fs-3">
+                                </i></button>
                         </div>
                         <!-- Edit button only if you are author -->
                         @can('update', $submission->getImage())

@@ -57,21 +57,21 @@
                 <span class="d-flex">
                     @auth
                         <div class="nav-item dropdown">
-
-                                <a class="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
-                                </a>
+                                <div class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <strong>{{ Auth::user()->name }}</strong>
+                                </div>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item " href="{{route('profile.edit')}}">Upraviť</a></li>
-                                    <li><a class="dropdown-item " href="#"><form class="dropdown-item" method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')"
-                                                     onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form></a></li>
+                                    <li><a class="dropdown-item " href="{{route('profile')}}">Profil</a></li>
+                                    <li><a class="dropdown-item " href="{{route('profile.edit')}}">Upravit</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form  method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <span class="red">Odhlasit</span>
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
 
                         </div>
