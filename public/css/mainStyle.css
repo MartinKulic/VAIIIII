@@ -126,3 +126,44 @@
 }
 
 
+
+.profileSubInfo{
+    background-color: rgba(55, 59, 69, 0.82);
+    padding: 10px;
+}
+
+.imgDescInProfile{
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 14em;
+
+}
+.profileSubInfo{
+    height: 20vh;
+    min-height: 14em;
+}
+@media (max-width: 767px){
+    .profileSubInfo {
+        height: auto;
+    }
+    .imgColProfile{
+        height: auto;
+        width: 100%;
+        justify-content: start;
+    }
+}
+
+.imgColProfile{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imgColProfile img{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}

@@ -61,7 +61,7 @@
                                     <strong>{{ Auth::user()->name }}</strong>
                                 </div>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item " href="{{route('profile')}}">Profil</a></li>
+                                    <li><a class="dropdown-item " href="{{route('profile', ["userID"=> Auth::id() ,"what"=>"Nahrane"])}}">Profil</a></li>
                                     <li><a class="dropdown-item " href="{{route('profile.edit')}}">Upravit</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>

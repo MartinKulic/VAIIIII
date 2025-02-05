@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Submission;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Image;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,9 +13,29 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, string $userID, string $what): View
     {
-        return view('profile.index');
+        $submissions = array();
+        if($what === 'Fav') {
+            return view('profile.index');
+        }
+        else{
+            $quie = Image::where("autor_id", $userID)->orderBy('created_at','DESC')->paginate(2);
+
+
+            foreach ($quie as $image) {
+                $newSub = new Submission($image->id, Auth::id());
+                if ($newSub->getImageId() != 0)
+                {
+                    $submissions[] = $newSub;
+                }
+            }
+
+            return view('profile.index',[
+                "submissions" => $submissions
+            ]);
+        }
+
     }
 
     /**
