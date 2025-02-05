@@ -1,19 +1,36 @@
 <?php
 
 ?>
+<link rel="stylesheet" href="{{asset('awesomplete/awesomplete.css')}}" />
+<script src="{{asset('awesomplete/awesomplete.js')}}" async></script>
 
 <aside class="col-xl-2 col-lg-3 order-lg-1 order-3 p-2 sideBar">
-    <div class="input-group mb-2 align-self-center">
-          <span class="input-group-text">
-            <i class = "bi-search"></i>
-          </span>
-        <textarea class="form-control" aria-label="With textarea">Pes Mačka Sample Unfunny</textarea>
-    </div>
-    <!-- Aktivne vo filtry -->
-    <div class="row">
-        <h3 class="col align-items-start">Aktývny Filter</h3>
-        <button class="col-4 me-3 btn-danger align-items-end">Zruš filter</button>
-    </div>
+
+{{--    <form>--}}
+        <label>Caption vyhladavanie</label>
+        <div class="input-group mb-2 align-self-center">
+              <button id="searchByCaption" class="input-group-text">
+                <i class = "bi-search"></i>
+              </button>
+            <textarea id="captionFilter" class="form-control" aria-label="Caption search">{{request("caption")}}</textarea>
+            <button id="searchByCaptionEmplpty" class="input-group-text">&times</button>
+        </div>
+        <label>Tag vyhladavanie</label>
+        <div class="input-group mb-2 align-self-center">
+              <button id="searchByTag" class="input-group-text">
+                <i class = "bi-search"></i>
+              </button>
+            <textarea id="tagSearch" class="form-control" aria-label="Tag search">NEFUNKCNE{{ collect(request('tags', []))->join(' ') }}</textarea>
+            <button id="tagSearchEmpty" class="input-group-text">&times</button>
+        </div>
+        <!-- Aktivne vo filtry -->
+        <div class="row">
+            <h3 class="col align-items-start">Aktývny Filter</h3>
+            <button id="btnClearFilters" class="col-3 me-1 btn-danger align-items-end">Zruš filtere</button>
+            <button id="btnSearchCaptTag" class="col-2 me-3 btn-danger align-items-end"><i class = "bi-search"></i></button>
+        </div>
+
+{{--    </form>--}}
 
     <ul class="mt-2 p-2 zoznamTags container-fluid justify-content-center">
         <li class="tagRow mt-1 p-1 wighterBackground">
@@ -78,3 +95,5 @@
 
     </ul>
 </aside>
+
+<script src="{{asset('js/search.js')}}"></script>

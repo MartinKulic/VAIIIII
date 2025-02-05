@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/d/{imgID}', [HomeController::class, 'detail'])->name('image.detail');
+Route::get('/s', [HomeController::class, 'search'])->name('search');
 
 
 

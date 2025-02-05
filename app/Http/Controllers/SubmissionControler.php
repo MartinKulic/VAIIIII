@@ -20,6 +20,7 @@ class SubmissionControler extends Controller
             'title' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'nullable|string',
+            'capt' => 'nullable|string',
         ]);
 
         $path = $request->file('image')->store('uploads', 'public');
@@ -29,6 +30,7 @@ class SubmissionControler extends Controller
             'title' => $request->title,
             'image_path' => $path,
             'description' => $request->description,
+            "caption" => $request->caption,
         ]);
 
         return redirect()->back()->with('success', 'Obrázok bol úspešne nahraný!');
@@ -53,11 +55,13 @@ class SubmissionControler extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'capt' => 'nullable|string',
         ]);
 
         $submission->update([
             'title' => $request->title,
             'description' => $request->description,
+            'caption' => $request->caption
         ]);
 
         return redirect()->route('home')->with('success', 'Obrázok bol upravený.');

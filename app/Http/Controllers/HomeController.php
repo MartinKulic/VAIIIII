@@ -11,11 +11,36 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-
         $images = Image::orderBy('created_at','DESC')->paginate(64);
 
         return view('home.index', [
             "images" => $images,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            "caption" => "string"
+        ]);
+
+        $caption = $request->caption;
+        $tags = $request->tags;
+
+        $dotaz = Image::orderBy('created_at','DESC');
+
+        if (!empty($caption)) {
+            if ( $caption == "_no_caption_")
+            {
+                $dotaz = $dotaz->where("caption", null);
+            }
+            else {
+                $dotaz->where('caption', 'LIKE', '%'.$caption . '%');
+            }
+        }
+
+        return view('home.index', [
+            "images" => $dotaz->paginate(64),
         ]);
     }
 

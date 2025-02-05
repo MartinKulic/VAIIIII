@@ -25,7 +25,7 @@
                             <span id="scoreVal" class="mx-2 h4 align-middle"><?= $rating->getScore() ?></span>
                             <button id ="voteDown" class="btn btn-<?php if (!($rating->getCurUserVote() < 0) ){ echo "outline-"; } ?>danger "><i class="bi-hand-thumbs-down fs-3"></i></button>
                             <span id="voteDownCount" class="red"><?= $rating->getDown() ?></span>
-                            <button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi-star-fill fs-3"></i></button>
+                            <button id="favBtn" class="mx-lg-5 mx-1 btn btn-<?php if(!$submission->getIsFaved()) { echo "outline-";} ?>warning "><i class="bi bi-heart fs-3"></i></button>
                         </div>
                         <!-- Edit button only if you are author -->
                         @can('update', $submission->getImage())
