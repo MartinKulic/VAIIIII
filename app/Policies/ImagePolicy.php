@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Image;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 
 class ImagePolicy
 {
@@ -29,7 +30,7 @@ class ImagePolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return Gate::allows('createImg', $user);
     }
 
     /**
@@ -37,7 +38,7 @@ class ImagePolicy
      */
     public function update(User $user, Image $image): bool
     {
-        return $user->id === $image->autor_id;
+        return $user->id === $image->autor_id && $user->role !== 'r';
     }
 
     /**
@@ -45,7 +46,7 @@ class ImagePolicy
      */
     public function delete(User $user, Image $image): bool
     {
-        return $user->id === $image->autor_id;
+        return $user->id === $image->autor_id && $user->role !== 'r';
     }
 
     /**

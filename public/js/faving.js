@@ -20,8 +20,12 @@ class Faving{
         }, "fav");
 
         if(isResponseGood(response, "Len prihlaseny pouzivatelia mozu mat svoje oblubene obrazky")){
-            response.json().then((r)=>(this.updateFav(r)))
+            response.json().then((r)=>{
+                this.updateFav(r)
+            })
         }
+        this.#favSpinner.classList.add("d-none")
+        this.#favIcon.classList.remove("d-none")
     }
     updateFav(response){
         if(response["faved"]===true){
@@ -36,8 +40,5 @@ class Faving{
 
             showTimedAllert("Uspene odstranene z oblubenych", 1000, "secondary")
         }
-
-        this.#favSpinner.classList.add("d-none")
-        this.#favIcon.classList.remove("d-none")
     }
 }

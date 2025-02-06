@@ -32,10 +32,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @auth
-
+                        @can('createImg', Auth::user())
                     <li class="nav-item">
                         <a class="btn btn btn-outline-info" href="{{route('image.create')}}"><i class="bi bi-arrow-bar-up"></i> Nahrať</a>
                     </li>
+                        @endcan
 
                     @endauth
                     <li class="nav-item">
@@ -59,6 +60,16 @@
                         <div class="nav-item dropdown">
                                 <div class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <strong>{{ Auth::user()->name }}</strong>
+
+                                    @switch(\Illuminate\Support\Facades\Auth::user()->role )
+                                        @case('a')
+                                            <span class="badge text-bg-danger">  (admin)</span>
+                                            @break
+                                        @case('r')
+                                            <strong class="badge text-bg-warning">  (restricted)</strong>
+                                            @break
+                                    @endswitch
+
                                 </div>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item " href="{{route('profile', ["userID"=> Auth::id() ,"what"=>"Nahrane"])}}">Profil</a></li>

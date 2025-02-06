@@ -32,8 +32,6 @@ Route::get('/phpinfo', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    //Route::get('/submission/new', [SubmissionController::class, 'new'])->name('submission.new');
-
     Route::resource('image', ImageController::class);
 
     Route::delete('image/{image}/delete', [ImageController::class, 'destroy'])->name('image.destroy');
@@ -45,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('profile/changeRole', [ProfileController::class, 'changeRole'])->name('profile.changeRole');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

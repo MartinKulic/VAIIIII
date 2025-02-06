@@ -60,6 +60,17 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade'); //Mozno by nemusel byt cascade
         });
+
+        Schema::create("reports", function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text("reason");
+            $table->timestamp('created_at')->useCurrent();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('image_id')->references('id')->on('images')->onDelete('cascade');
+        });
     }
 
     /**
@@ -72,5 +83,6 @@ return new class extends Migration
         Schema::dropIfExists('image_tags');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('images');
+        Schema::dropIfExists('reports');
     }
 };

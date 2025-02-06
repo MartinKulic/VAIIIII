@@ -1,6 +1,5 @@
 <?php
-
-use App\Models\Image;
+namespace App\Policies;
 use App\Models\User;
 
 class UserPolicy
@@ -16,7 +15,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Image $image): bool
+    public function view(User $who, User $changeUser): bool
     {
         return true;
     }
@@ -32,23 +31,23 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Image $image): bool
+    public function update(User $who, User $changeUser): bool
     {
-        return $user->id === $image->autor_id;
+        return $who->id === $changeUser->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Image $image): bool
+    public function delete(User $who, User $changeUser): bool
     {
-        return $user->id === $image->autor_id;
+        return $who->id === $changeUser->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Image $image): bool
+    public function restore(User $who, User $changeUser): bool
     {
         return false;
     }
@@ -56,8 +55,16 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Image $image): bool
+    public function forceDelete(User $who, User $changeUser): bool
     {
         return false;
+    }
+
+    public function changeRole(User $who, User $changeUser): bool{
+        return $who->role === 'a' && $who->id !== $changeUser->id;
+    }
+
+    public function createImg(User $user): bool {
+        return $user->role !== 'r';
     }
 }

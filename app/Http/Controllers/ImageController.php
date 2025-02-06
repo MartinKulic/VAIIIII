@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -60,6 +61,8 @@ class ImageController extends Controller
      */
     public function edit(Image $image)
     {
+        Gate::authorize('edit', $image);
+
         return view('submission.edit',[
             'action' => route('image.update', ['image' => $image->id]),
             'purpose' => "edit",
@@ -73,6 +76,8 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
+        Gate::authorize('update', $image);
+
         $request->validate([
             'title' => 'required|string|max:255',
             'desc' => 'nullable|string',

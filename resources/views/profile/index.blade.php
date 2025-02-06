@@ -2,7 +2,60 @@
         <div class="container">
             <div class="row d-flex d-flex justify-content-between">
                 <div class="col">
-                    <h1>{{ $userName }}</h1>
+                    <span class="h1">{{ $userName }}</span>
+                    <span class="h4  position-relative">@switch($userRole )
+                            @case('Admin')
+                                <span class="position-absolute top-0 start-100 translate-middle-y badge rounded-pill bg-danger">admin</span>
+                                @break
+                            @case('Restricted')
+                                <strong class="position-absolute top-0 start-100 translate-middle-y badge rounded-pill bg-warning">restricted</strong>
+                                @break
+                        @endswitch</span>
+                    @can("changeRole", \Illuminate\Support\Facades\Auth::user(), request("userID"))
+                        <div>
+                            <form method="post" action="{{route("profile.changeRole")}}" enctype="multipart/form-data">
+                                @csrf
+                                @method("post")
+
+                                <input type="hidden" name="userID" value="{{request("userID")}}">
+
+                                <div class="d-flex flex-row align-items-center">
+                                    <label for="newRoleSelect">Rola:</label>
+                                    <select name="newRole" id="newRoleSelect" class="form-select mx-3" aria-label="">
+                                        <option value="Normal" <?php if($userRole==="Normal") {echo "selected";} ?> >Normal</option>
+                                        <option class="bg-warning text-dark" value="Restricted" <?php if($userRole==="Restricted") {echo "selected";} ?> >Restricted</option>
+                                        <option class="bg-danger" value="Admin" <?php if($userRole==="Admin") {echo "selected";} ?> >Admin</option>
+                                    </select>
+
+                                    <div class="col">
+                                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#confirmRoleChangeModal">Change</button>
+                                    </div>
+                                </div>
+
+                                <!-- Conform dialog -->
+                                <div class="modal fade" id="confirmRoleChangeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Si si isty?</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Naozaj chces zmenit roulu pouzivatelovy <strong>{{$userName}}</strong> z <span class="badge text-bg-light">{{$userRole}}</span> na <span id="badgeNewRole" class="badge text-bg-light"></span> ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvor</button>
+                                                <button type="submit" class="btn btn-primary">Ano zmen</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    @endcan
+
                 </div>
                 <div class="col d-flex justify-content-end align-items-center">
                     <ul class="nav nav-pills  ">
@@ -14,6 +67,7 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
         <hr class="hr">
@@ -68,4 +122,14 @@
     for (let score of imagesScoreVals){
         colour(score)
     }
+</script>
+<script>
+    const roleSelct = document.getElementById("newRoleSelect")
+    const newRoleBadge = document.getElementById("badgeNewRole")
+
+    newRoleBadge.textContent = roleSelct.value
+
+    roleSelct.addEventListener("change", ()=>{
+        newRoleBadge.textContent=roleSelct.value
+    })
 </script>
