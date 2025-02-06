@@ -69,4 +69,13 @@ class UserPolicy
     public function createImg(User $user): bool {
         return $user->role !== 'r';
     }
+    public function manageReports (User $user): bool{
+        return $user->role === 'a';
+    }
+    public function viewReport (User $user): bool{
+        return $user->role === 'a';
+    }
+    public function createReport (User $user): bool{
+        return $user->role !== 'r';
+    }
 }

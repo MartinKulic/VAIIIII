@@ -3,6 +3,7 @@
 use App\Http\Controllers\FavController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubmissionControler;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::post('profile/changeRole', [ProfileController::class, 'changeRole'])->name('profile.changeRole');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+    Route::post('/reports', [ReportController::class, 'create'])->name('report.img');
 });
 
 require __DIR__.'/auth.php';
