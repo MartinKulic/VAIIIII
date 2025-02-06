@@ -36,12 +36,17 @@
                                 </i></button>
                         </div>
                         <!-- Edit button only if you are author -->
-                        @can('update', $submission->getImage())
+                        <?php $image = $submission->getImage() ?>
+
+                        @auth
+                        @can('update', $image)
                         <div class="d-flex align-items-stretch">
                             <a href="{{route('image.edit', ["image" => $submission->getImage()])}}" class="btn btn-primary d-flex align-items-center">
                                 <span class="h5 mb-1"> <i class="bi bi-pencil"></i> Edit </span></a>
                         </div>
                         @endcan
+                        @endauth
+
                     </div>
                     <div class="row mt-3">
                         <div class="col pt-0 pb-3 px-3 bg-body-secondary">

@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Gate;
 
 class ImagePolicy
 {
+    public function before(User $user, $ability)
+    {
+        if ($user->role === 'a') {
+            return true; // Admin môže všetko
+        }
+    }
     /**
      * Determine whether the user can view any models.
      */
@@ -33,6 +39,10 @@ class ImagePolicy
         return Gate::allows('createImg', $user);
     }
 
+    public function edit(User $user, Image $image): bool
+    {
+        return $this->update($user, $image);
+    }
     /**
      * Determine whether the user can update the model.
      */

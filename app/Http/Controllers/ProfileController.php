@@ -50,8 +50,8 @@ class ProfileController extends Controller
 
         return view('profile.index',[
             "images" => $images,
-            "userName" => $user->name,
-            "userRole" => $userRole,
+            "user" => $user,
+            "userRole" =>$userRole
         ]);
     }
 
@@ -103,7 +103,6 @@ class ProfileController extends Controller
     }
 
     public function changeRole(Request $request){
-        Gate::authorize('changeRole', Auth::user());
 
         $request->validate([
             'userID' => 'integer|required',
@@ -111,6 +110,8 @@ class ProfileController extends Controller
         ]);
 
         $user = User::findOrFail($request->userID);
+
+        Gate::authorize("changeRole", $user);
 
         $newRole = 'n';
         $inRole = $request->newRole;

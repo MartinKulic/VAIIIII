@@ -108,15 +108,15 @@
 <hr class="hr">
 <footer class="py-3 py-md-5 mt-5 bg-body-tertiary">
     <div class="container py-3 px-4 text-body-secondary">
-        <div class="row">
+        <div class="row d-flex justify-content-around">
             <div class="col-lg-4">
                 <a class="d-inline-flex align-items-center mb-2 text-decoration-none text-body-emphasis">
                     <img alt="Logo" src="{{ asset('assets/Logo.png') }}" height="32">
                     <span class="fs-5 ms-2">MeMeMark</span>
                 </a>
-                <p>MeMeMark je stránka umožňujúca nahrať, organizovať a následe vyhľadať meme na základe pridelených tagov.</p>
+                <p>MeMeMark je stránka umožňujúca nahrať, organizovať a následe vyhľadať meme (na základe pridelených tagov).</p>
             </div>
-            <div class="col-5 col-lg-4">
+            <div class="col-lg-4">
                 <p>
                     Lorem ipsum odor amet, consectetuer adipiscing elit. Turpis natoque facilisi vulputate potenti habitant dictum neque amet metus. Orci non et risus pulvinar molestie nibh. Velit facilisis lacinia accumsan aenean posuere class amet sagittis. Ultrices platea libero inceptos; venenatis facilisis vehicula netus. Rutrum nullam ad accumsan nostra ultrices; non praesent. Tempor justo iaculis gravida facilisis porttitor scelerisque euismod per.
                 </p>

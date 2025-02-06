@@ -98,12 +98,16 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
+        GATE::authorize('delete', $image);
+
+
         Storage::disk('public')->delete($image->path);
 
         $image->delete();
 
         return redirect()->route('home')->with('success', 'Obrázok bol úspešne odstraneny!');
     }
+
 
     public function rate(Request $request, Image $image)
     {

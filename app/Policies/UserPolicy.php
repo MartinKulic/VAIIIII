@@ -1,6 +1,8 @@
 <?php
 namespace App\Policies;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+use Ramsey\Uuid\Type\Integer;
 
 class UserPolicy
 {
@@ -60,8 +62,8 @@ class UserPolicy
         return false;
     }
 
-    public function changeRole(User $who, User $changeUser): bool{
-        return $who->role === 'a' && $who->id !== $changeUser->id;
+    public function changeRole(User $user, User $changeUser): bool{
+        return $user->role === 'a' && $user->id !== $changeUser->id;
     }
 
     public function createImg(User $user): bool {

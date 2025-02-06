@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row d-flex d-flex justify-content-between">
                 <div class="col">
-                    <span class="h1">{{ $userName }}</span>
+                    <span class="h1">{{ $user->name }}</span>
                     <span class="h4  position-relative">@switch($userRole )
                             @case('Admin')
                                 <span class="position-absolute top-0 start-100 translate-middle-y badge rounded-pill bg-danger">admin</span>
@@ -11,7 +11,7 @@
                                 <strong class="position-absolute top-0 start-100 translate-middle-y badge rounded-pill bg-warning">restricted</strong>
                                 @break
                         @endswitch</span>
-                    @can("changeRole", \Illuminate\Support\Facades\Auth::user(), request("userID"))
+                    @can("changeRole", $user)
                         <div>
                             <form method="post" action="{{route("profile.changeRole")}}" enctype="multipart/form-data">
                                 @csrf
@@ -41,7 +41,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Naozaj chces zmenit roulu pouzivatelovy <strong>{{$userName}}</strong> z <span class="badge text-bg-light">{{$userRole}}</span> na <span id="badgeNewRole" class="badge text-bg-light"></span> ?
+                                                Naozaj chces zmenit roulu pouzivatelovy <strong>{{$user->name}}</strong> z <span class="badge text-bg-light">{{$userRole}}</span> na <span id="badgeNewRole" class="badge text-bg-light"></span> ?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvor</button>
