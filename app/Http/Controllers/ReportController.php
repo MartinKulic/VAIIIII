@@ -45,8 +45,11 @@ class ReportController extends Controller
     }
 
 
-    public function cancelReport(Request $request, Report $report){
+    public function cancelReport(Request $request, int $repID){
 
+        $report = Report::findOrFail($repID);
         $report->delete();
+
+        return redirect()->back();
     }
 }
