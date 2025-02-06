@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Submission;
 use App\Models\Image;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,28 @@ class HomeController extends Controller
 
     public function najlepsieZa(Request $request, string $obdobie)
     {
+//        SELECT images.*, COALESCE(SUM(ratings.value), 0) AS total_ratings
+//        FROM images
+//        LEFT JOIN ratings ON images.id = ratings.image_id and
+//          ratings.updated_at between ADD_MONTHS((select NOW()), -1) and (SELECT NOW())
+//        GROUP BY id
+//        ORDER BY total_ratings DESC;
 
+        $startDate = Carbon::now()->subMonth();
+        $endDate = Carbon::now();
+
+        $images = Image::select('images.*')
+            ->selectRaw('COALESCE(SUM(ratings.value), 0) AS total_ratings')
+            ->leftJoin('ratings', function($join) use ($startDate, $endDate) {
+                $join->on('images.id', '=', 'ratings.image_id')
+                    ->whereBetween('ratings.updated_at', [$startDate, $endDate]);
+            })
+            ->groupBy('images.id', 'images.path', 'images.name', 'images.desc', 'images.caption', 'images.autor_id', 'images.created_at', 'images.updated_at')
+            ->orderByDesc('total_ratings')
+            ->take(10)
+            ->paginate(self::PAGING);
+
+        return view('home.index', ["images" => $images]);
     }
 
     public function search(Request $request)

@@ -39,17 +39,17 @@
 
                     @endauth
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{route('home')}}">Nedávne</a>
+                        <a class="nav-link <?php if(!request("obdobie")) {echo "active";} ?>" aria-current="page" href="{{route('home')}}">Nedávne</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle <?php if(request("obdobie")) {echo "active";} ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Najlepšie za
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item disabled" href="#">Deň</a></li>
-                            <li><a class="dropdown-item disabled" href="#">Týždeň</a></li>
-                            <li><a class="dropdown-item disabled" href="#">Mesiac</a></li>
-                            <li><a class="dropdown-item disabled" href="#">Rok</a></li>
+                            <li><a class="dropdown-item disabled" href="{{route('home.najlepsieZa',['obdobie'=>'den'])}}">Deň</a></li>
+                            <li><a class="dropdown-item disabled" href="{{route('home.najlepsieZa',['obdobie'=>'tyzden'])}}">Týždeň</a></li>
+                            <li><a class="dropdown-item" href="{{route('home.najlepsieZa',['obdobie'=>'mesiac'])}}">Mesiac</a></li>
+                            <li><a class="dropdown-item disabled" href="{{route('home.najlepsieZa',['obdobie'=>'rok'])}}">Rok</a></li>
                         </ul>
                     </li>
                 </ul>
