@@ -1,0 +1,24 @@
+Pred pokracovanim sa uistite ze mate mainstalovane PHP, Composer, a the Laravel.
+
+Spusti docker-compose.yml (docker-compose.yml je v tom samom priexintu ako tento dokument).
+
+Pockaj na vytvorenie kontainerov.
+
+php artisan migrate --seed
+
+podokonceni su funkcne nasledovne kontainery:
+
+    laravel.test-1 - port 80:80     = web app
+        adminUser:
+            email: admin@example.com
+            Heslo: password
+        testUser:
+            email: test@example.com
+            Heslo: password
+    adminer-1      - port 8080:8080 = adminer
+        System: MySQL
+        Serveer: db
+        Pouzivatel: sail
+        Heslo: password
+        Databaza: mememark_db
+    mariadb-1      - port 3306:3306 = databaza
