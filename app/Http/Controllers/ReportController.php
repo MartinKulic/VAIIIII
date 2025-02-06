@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ReportHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Image;
 use App\Models\Report;
@@ -14,7 +15,12 @@ class ReportController extends Controller
     public function index(){
         Gate::authorize('viewReport', Auth::user());
 
-        $reports = Image::orderBy('created_at','DESC')->paginate(15);
+        $reportsRaw = Report::orderBy('created_at','DESC')->paginate(15);
+        $reports = [];
+
+        foreach ($reportsRaw as $report){
+            $reports[] = new ReportHelper($report);
+        }
 
         return view('reports.reportsMng',[
             'reports' => $reports,
@@ -36,6 +42,12 @@ class ReportController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function deleteImg(Request $request){
+
+    }
+    public function cancelReport(Request $request){
 
     }
 }

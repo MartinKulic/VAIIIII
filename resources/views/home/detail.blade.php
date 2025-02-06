@@ -69,7 +69,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvor</button>
-                                                        <button type="submit" class="btn btn-primary">Repost</button>
+                                                        <button type="submit" class="btn btn-primary">Report</button>
                                                     </div>
                                                 </div>
                                             </div>

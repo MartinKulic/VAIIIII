@@ -2,14 +2,14 @@
 ?>
 
 
-<a class="strippedLink" href="{{route('image.detail', ['imgID'=>$report->id])}}">
+<a class="strippedLink" href="{{route('image.detail', ['imgID'=>$report->getImage()->id])}}">
     <div class="container mb-3" onclick=>
         <div class="row ">
             <div class="col-12">
                 <div class="d-flex flex-column flex-md-row profileSubInfo">
                     <!-- Obrázok -->
                     <div class="col-md-4 imgColProfile">
-                        <img src="{{asset('storage/'. $report->path)}}" class="img-fluid object-fit-cover" alt="Obrázok">
+                        <img src="{{asset('storage/'. $report->getImage()->path)}}" class="img-fluid object-fit-cover" alt="Obrázok">
                     </div>
                     <!-- Obsah -->
                     <div class="col-md-8 p-3 d-flex flex-column justify-content-between">
@@ -17,12 +17,12 @@
                             <h2 class="mb-4"></h2>
                             <span class="rating">
                                             <span class="green"> <i class="bi bi-caret-up"></i></span >
-                                            <span class="score_number">{{ \App\Models\Rating::getRatingValueFor($report->id) }} </span>
+                                            <span class="score_number">{{ \App\Models\Rating::getRatingValueFor($report->getImage()->id) }} </span>
                                             <span class="red"><i class="bi bi-caret-down"></i></span >
                                         </span>
                         </div>
                         <p class="imgDescInProfile">
-                            {{$report->desc}}
+                            {{$report->getReport()->reason}}
                         </p>
                         <div class="flex-row d-flex justify-content-end">
                             <div class = "col d-flex"></div>
