@@ -44,10 +44,9 @@ class ReportController extends Controller
         return redirect()->back();
     }
 
-    public function deleteImg(Request $request){
 
-    }
-    public function cancelReport(Request $request){
+    public function cancelReport(Request $request, Report $report){
 
+        $report->delete();
     }
 }

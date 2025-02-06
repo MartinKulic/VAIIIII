@@ -27,17 +27,24 @@
                         <div class="flex-row d-flex justify-content-end">
                             <div class = "col d-flex"></div>
                             <span>
-                                <button class="btn btn-outline-success mx-3">
+                                <a href="{{route("report.cancel", ["repID"=>$report->getReport()->id])}}" class="btn btn-outline-success mx-3">
                                     <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
                                     <i class="bi bi-check-lg"></i>
-                                </button>
+                                </a>
                             </span>
-                            <span>
-                                <button class="btn btn-outline-danger">
-                                    <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </span>
+                            <div>
+                                <form action="{{ route('image.destroy', $report->getImage()->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+
+                                                <button class="btn btn-outline-danger">
+                                                    <span class="spinner-border fs-3 d-none" aria-hidden="true"></span>
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

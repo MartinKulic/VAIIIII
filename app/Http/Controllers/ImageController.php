@@ -105,7 +105,7 @@ class ImageController extends Controller
 
         $image->delete();
 
-        return redirect()->route('home')->with('success', 'Obrázok bol úspešne odstraneny!');
+        return redirect()->back()->with('success', 'Obrázok bol úspešne odstraneny!');
     }
 
 

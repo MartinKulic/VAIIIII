@@ -17,8 +17,11 @@ class ReportPolicy{
     public function create(User $user){
         return $user->role !== 'r';
     }
-    public function delete(User $user, Report $report){
-        return $user->id === $report->user_id && $user->role !== 'r';
+    public function deleteImg(User $user, Report $report){
+        return $user->role === 'a';
+    }
+    public function cancelReport(User $user, Report $request){
+        return $user->role === 'a';
     }
 
 

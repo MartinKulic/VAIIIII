@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
     Route::post('/reports', [ReportController::class, 'create'])->name('report.img');
+    Route::get('report/{repID}/cancel', [ReportController::class, 'cancelReport'])->name('report.cancel');
 });
 
 require __DIR__.'/auth.php';
