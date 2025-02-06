@@ -167,3 +167,8 @@
     max-width: 100%;
     object-fit: contain;
 }
+
+.strippedLink{
+    text-decoration: none;
+    color: white;
+}

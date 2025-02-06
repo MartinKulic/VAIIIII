@@ -16,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/najlepsieZa/{obdobie}', [HomeController::class, 'najlepsieZa'])->name('home.najlepsieZa');
 Route::get('/d/{imgID}', [HomeController::class, 'detail'])->name('image.detail');
 Route::get('/s', [HomeController::class, 'search'])->name('search');
+
+Route::get('/profile/{userID}/{what}', [ProfileController::class, 'index'])->name('profile');
 
 
 
@@ -41,7 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile/{userID}/{what}', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

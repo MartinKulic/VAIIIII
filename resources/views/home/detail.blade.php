@@ -47,7 +47,7 @@
                         <div class="col pt-0 pb-3 px-3 bg-body-secondary">
                             <div class="row d-inline">
                                 <h4>{{ $submission->getImage()->name }}</h4>
-                                <p class="fs-6">By {{ $submission->getAutorName() }}</p>
+                                <p class="fs-6">By <a class="fs-6 link-body-emphasis link-underline-success link-offset-2 link-underline-opacity-75-hover" href="{{route('profile', ["userID"=>$submission->getAutorId(), "what"=>"Nahrane"])}}">{{ $submission->getAutorName() }}</a></p>
                             </div>
                             <p class = "text-break">
                                 {{  $submission->getImage()->desc }}

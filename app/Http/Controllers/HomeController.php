@@ -21,6 +21,11 @@ class HomeController extends Controller
         ]);
     }
 
+    public function najlepsieZa(Request $request, string $obdobie)
+    {
+
+    }
+
     public function search(Request $request)
     {
         $request->validate([

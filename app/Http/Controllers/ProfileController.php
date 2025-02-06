@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Submission;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Fav;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,27 +17,32 @@ class ProfileController extends Controller
 {
     public function index(Request $request, string $userID, string $what): View
     {
-        $submissions = array();
+        $user = User::find($userID);
+        if(!$user)
+        {
+            abort(404, 'User not found.');
+        }
+
+        $images = [];
+
         if($what === 'Fav') {
-            return view('profile.index');
+
+//            select * from images
+//              where id in (select image_id from favs where user_id = $userID);
+
+            $images = Image::whereIn('id', function($query) use ($userID) {
+                $query->select('image_id')
+                    ->from('favs')
+                    ->where('user_id', $userID);
+            })->orderBy('created_at','DESC')->paginate(16);
         }
         else{
-            $quie = Image::where("autor_id", $userID)->orderBy('created_at','DESC')->paginate(2);
-
-
-            foreach ($quie as $image) {
-                $newSub = new Submission($image->id, Auth::id());
-                if ($newSub->getImageId() != 0)
-                {
-                    $submissions[] = $newSub;
-                }
-            }
-
-            return view('profile.index',[
-                "submissions" => $submissions
-            ]);
+            $images = Image::where("autor_id", $userID)->orderBy('created_at','DESC')->paginate(16);
         }
-
+        return view('profile.index',[
+            "images" => $images,
+            "userName" => $user->name,
+        ]);
     }
 
     /**
